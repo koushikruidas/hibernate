@@ -19,6 +19,14 @@ public class UpdateObject {
 			
 			session.getTransaction().commit();
 			
+			// Will update bulk of data using update query 
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			session.createQuery("update Student s set email='hello@world.com'"
+					+ "where s.lastName='Maity'or s.lastName='Mondal'").executeUpdate();
+			
+			session.getTransaction().commit();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
