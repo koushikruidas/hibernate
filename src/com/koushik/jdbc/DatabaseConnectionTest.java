@@ -3,7 +3,6 @@ package com.koushik.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class DatabaseConnectionTest {
@@ -16,18 +15,21 @@ public class DatabaseConnectionTest {
 		System.out.println("Enter the student id: ");
 		Scanner scan = new Scanner(System.in);
 		id = scan.nextInt();
+		Connection connection = null;
 		try {
 			System.out.println("Connecting to the datbase: " + databaseURL);
-			Connection connection = DriverManager.getConnection(databaseURL, username, password);
+			connection = DriverManager.getConnection(databaseURL, username, password);
 			System.out.println("Connection made successfully");
 			System.out.println("Preaparing a stmt");
 			PreparedStatement select = connection.prepareStatement(sqlstmt);
 			connection.setAutoCommit(false);
 			select.setInt(1, id);
-			ResultSet rs = select.executeQuery();
 			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			scan.close();
 		}
 	}
+
 }

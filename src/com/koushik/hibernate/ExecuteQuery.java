@@ -22,15 +22,24 @@ public class ExecuteQuery {
 			List<Student> result = session.createQuery("from Student s "
 					+ "where s.lastName like '%ruid%'").getResultList();
 			
-			Iterator<Student> listIterator = result.iterator();
-			while(listIterator.hasNext()) {
-				System.out.println(listIterator.next().toString());
-			}
+			displayQueryResult(result);
+			
+			List<Student> result2 = session.createQuery("from Student s "
+					+ "where s.firstName like '__u%'").getResultList();
+			displayQueryResult(result2);
+			
 			session.getTransaction().commit();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			factory.close();
+		}
+	}
+
+	private static void displayQueryResult(List<Student> result) {
+		Iterator<Student> listIterator = result.iterator();
+		while(listIterator.hasNext()) {
+			System.out.println(listIterator.next().toString());
 		}
 	}
 

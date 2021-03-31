@@ -20,7 +20,7 @@ public class CreateStudentData {
 			
 			System.out.println("Saving the student");
 			session.save(newStudent);
-			
+
 			System.out.println("Commit");
 			session.getTransaction().commit();
 			
